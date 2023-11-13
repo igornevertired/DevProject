@@ -10,7 +10,7 @@ pipeline{
             steps{
                 script{
                     docker.build('my-nginx', '.')
-                    docker.image('my-nginx').run('-p 80:80 -p 443:443 -d')
+                    docker.image('my-nginx').run('-p 443:443 -d')
                 }
             }
         }
