@@ -11,11 +11,13 @@ pipeline {
         stage('Build and Run Docker Container') {
             steps {
                 script {
+                    def imageName = "my-nginx-image"
                     def containerName = "my-nginx-container"
                     
                     sh "docker stop $containerName  || true"
                     sh "docker rm $containerName  || true"
-                    sh "docker run -d -p 80:80 -p 443:443 --name $containerName"
+                    sh "docker build -t $imageName ."
+                    sh "docker run -d -p 80:80 -p 443:443 --name $containerName $imageName"
                 }
             }
         }
