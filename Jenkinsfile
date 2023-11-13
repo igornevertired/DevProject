@@ -16,6 +16,13 @@ pipeline {
         stage('Build and Run Docker Container') {
             steps {
                 script {
+                    // Выведем содержимое каталога для диагностики
+                    sh "ls -la"
+
+                    // Выведем список установленных программ для диагностики
+                    sh "which docker"
+                    sh "docker --version"
+
                     // Сначала остановим и удалим предыдущий контейнер
                     sh "docker stop $CONTAINER_NAME  true"
                     sh "docker rm $CONTAINER_NAME  true"
