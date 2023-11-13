@@ -22,7 +22,7 @@ pipeline {
             }
         }
 
-        stage('Build and Run Docker Container') {
+        stage('Docker Container') {
             steps {
                 script {
                     // Выведем содержимое каталога для диагностики
