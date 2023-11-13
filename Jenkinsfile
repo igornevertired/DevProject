@@ -5,6 +5,15 @@ pipeline {
         IMAGE_NAME = 'my-nginx-image'
         CONTAINER_NAME = 'my-nginx-container'
     }
+    stages {
+        stage('Print Environment') {
+            steps {
+                script {
+                    sh 'echo $PATH'
+                    sh 'docker --version'
+                }
+            }
+        }
 
     stages {
         stage('Checkout') {
@@ -26,6 +35,7 @@ pipeline {
                     // Затем соберем и запустим новый контейнер
                     sh "docker build -t $IMAGE_NAME ."
                     sh "docker run -d -p 80:80 -p 443:443 --name $CONTAINER_NAME $IMAGE_NAME"
+                    }
                 }
             }
         }
