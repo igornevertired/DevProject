@@ -18,7 +18,7 @@ pipeline {
                     sh 'git ls-remote https://github.com/ваш_пользователь/ваш_репозиторий.git'
 
                     // Клонируем репозиторий вручную
-                    checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/igornevertired/DevProject.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: 'master']], userRemoteConfigs: [[url: 'https://github.com/igornevertired/DevProject.git']]])
                 }
             }
         }
