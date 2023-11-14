@@ -35,7 +35,7 @@ pipeline {
                     
                     // Затем соберем и запустим новый контейнер
                     sh "docker build -t $IMAGE_NAME ."
-                    sh "docker run -d -p 80:80 -p 443:443 --name $CONTAINER_NAME $IMAGE_NAME"
+                    sh "docker run -d -p 443:443 --name $CONTAINER_NAME $IMAGE_NAME"
                 }
             }
         }
