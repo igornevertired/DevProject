@@ -8,7 +8,7 @@ pipeline {
             }
         }
         
-        stage('Build and Run Docker Container') {
+        stage('Docker') {
             steps {
                 script {
                     def imageName = "my-nginx-image"
