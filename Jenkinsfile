@@ -30,8 +30,8 @@ pipeline {
                     sh 'git rev-parse HEAD'
                     
                     // Сначала остановим и удалим предыдущий контейнер
-                    sh "docker stop $CONTAINER_NAME  true"
-                    sh "docker rm $CONTAINER_NAME  true"
+                    sh "docker stop $CONTAINER_NAME || true"
+                    sh "docker rm $CONTAINER_NAME || true"
                     
                     // Затем соберем и запустим новый контейнер
                     sh "docker build -t $IMAGE_NAME ."
