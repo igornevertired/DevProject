@@ -14,6 +14,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
+                    // Выведем информацию о репозитории
+                    sh 'git ls-remote https://github.com/ваш_пользователь/ваш_репозиторий.git'
+
                     // Клонируем репозиторий вручную
                     checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/igornevertired/DevProject.git']]])
                 }
@@ -23,6 +26,9 @@ pipeline {
         stage('Build and Run Docker Container') {
             steps {
                 script {
+                    // Выведем информацию о коммите
+                    sh 'git rev-parse HEAD'
+                    
                     // Сначала остановим и удалим предыдущий контейнер
                     sh "docker stop $CONTAINER_NAME  true"
                     sh "docker rm $CONTAINER_NAME  true"
