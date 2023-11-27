@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HOST = 'ssh://igornevertired@172.19.0.1'
+        DOCKER_HOST = 'ssh://igornevertired@172.19.0.1 -o StrictHostKeyChecking=no'}
         IMAGE_NAME = 'my-nginx-image'
         CONTAINER_NAME = 'my-nginx-container'
     }
