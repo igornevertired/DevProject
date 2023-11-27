@@ -6,6 +6,23 @@ pipeline {
         IMAGE_NAME = 'my-nginx-image'
         CONTAINER_NAME = 'my-nginx-container'
     }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Сборка Docker-образа
+                    docker.build(IMAGE_NAME)
+                }
+            }
+        }
+
         stage('Deploy to Remote Server') {
             steps {
                 script {
@@ -18,3 +35,4 @@ pipeline {
             }
         }
     }
+}
