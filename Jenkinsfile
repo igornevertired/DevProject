@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Сборка Docker-образа
-                    docker.build(IMAGE_NAME)
+                    sh "docker build -t $IMAGE_NAME ."
                 }
             }
         }
