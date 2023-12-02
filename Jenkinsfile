@@ -17,8 +17,16 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Сборка Docker-образа
-                    docker.build(IMAGE_NAME)
+                    // Выведем информацию о коммите
+                    sh 'git rev-parse HEAD'
+                    
+                    // Сначала остановим и удалим предыдущий контейнер
+                    sh "docker stop $CONTAINER_NAME  true"
+                    sh "docker rm $CONTAINER_NAME  true"
+                    
+                    // Затем соберем и запустим новый контейнер
+                    sh "docker build -t $IMAGE_NAME ."
+                    sh "docker run -d -p 80:80 -p 443:443 --name $CONTAINER_NAME $IMAGE_NAME"
                 }
             }
         }
@@ -27,10 +35,8 @@ pipeline {
             steps {
                 script {
                     // Подключение к удаленному серверу по SSH
-                    sshagent(credentials: ['239bce57-c9aa-4217-8346-e5fb8b0ba7c5']) {
-                        sh "ssh $DOCKER_HOST 'docker stop $CONTAINER_NAME  true && docker rm $CONTAINER_NAME  true'"
-                        sh "ssh $DOCKER_HOST 'docker run -d -p 80:80 -p 443:443 --name $CONTAINER_NAME $IMAGE_NAME'"
-                    }
+                    sshagent(credentials: ['239bce57-c9aa-4217-8346-e5fb8b0ba7c5']) 
+                    
                 }
             }
         }
