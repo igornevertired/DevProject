@@ -19,6 +19,7 @@ pipeline {
             environment name: 'BUILD_IMAGE',
             value: 'true'
             beforeAgent true
+            }
         }
 
         stage('Deploy to Remote Server') {
